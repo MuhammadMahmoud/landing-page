@@ -24,7 +24,9 @@
  * Start Helper Functions
  * 
 */
-
+function sectionScroll(sectionNum) {
+    document.getElementsByClassName('{sectionNum}').scrollIntoView();
+}
 
 
 /**
