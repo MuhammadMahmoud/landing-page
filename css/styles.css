@@ -64,6 +64,8 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
+
+
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
@@ -84,13 +86,13 @@ section {
 
 .navbar__menu .menu__link:hover {
     background: #333;
-    color: #fff;
+    color: rgb(255, 255, 255);
     transition: ease 0.3s all;
 }
 
 /* Header Styles */
 .page__header {
-    background: #fff;
+    background: #000;
     position: fixed;
     top: 0;
     width: 100%;
