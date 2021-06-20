@@ -24,7 +24,9 @@ const appSections=document.getElementById('navbar__list'); // select ul for the 
 var fragment = document.createDocumentFragment(); 
 var appLiSections; // variable to loop with on li anchor create
 var attArr=[]; //array for the store of section data to add it to the anchor of the navbar
-var aqueries;
+var aqueries; // for list of anchors
+var queries; //for h2 inside sections
+var navLink=document.getElementById('navbar__menu');
 /**
  * End Global Variables
  * Start Helper Functions
@@ -42,7 +44,7 @@ var aqueries;
 // build the nav
 function navApp(sections) {
     var counter =0; // counter for the arr of sections data
-    // create li + class "liAtt" + store the data-nac att in array
+    // create li + class "liAtt" + store the data-nav att in array
     for (const section of sections) {
         var li = document.createElement('li');
         
@@ -62,8 +64,9 @@ function navApp(sections) {
         
         var a=document.createElement('a');
         a.classList.add('anchorAtt');
+        a.classList.add('menu__link');
         a.textContent=attArr[i];
-        a.href='#';
+        a.href='';
         
          
         
@@ -73,6 +76,7 @@ function navApp(sections) {
     
         appLiSections[i].appendChild(fragment);
     }
+    aqueries=document.querySelectorAll('anchorAtt');
 }
 
 // Add class 'active' to section when near top of viewport
@@ -100,10 +104,21 @@ function toggleActiveState(){
 
 
 // Scroll to anchor ID using scrollTO event
-function scrollToSection(event) {
-    event.preventDefault();
+function scrollToSection(Event) {
+    //aqueries=document.getElementsByTagName('a');
+    Event.preventDefault();
     //selected section
+    queries =document.querySelectorAll('h2');
+    //var selectedSection;
+    for (const queries of query) {
+        if(query.textContent == aquery.textContent){
+            query.scrollIntoView({behavior: 'smooth', block: 'center'}); 
+        }        
+    }
+
+    
 }
+
 
 /**
  * End Main Functions
@@ -114,7 +129,11 @@ function scrollToSection(event) {
 // Build menu 
 document.addEventListener('DOMContentLoaded',navApp(sections));
 // Scroll to section on link click
-//navLink.addEventListener('click', scrollToSection);
+//aqueries.addEventListener('click', scrollToSection(sections));
+//aqueries.forEach(aquery => aquery.addEventListener('click', scrollToSection));
+for (const aquery of aqueries) {
+    aquery.addEventListener('click', scrollToSection);
+}
 // Set sections as active
 window.addEventListener('scroll', toggleActiveState);
 
