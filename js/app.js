@@ -85,19 +85,19 @@ function navApp(sections) {
 // Add class 'active' to section when near top of viewport
 
 function toggleActiveState(){
-         for (const section of sections)
-    {   //console.log('currentSection is '+ currentSection+ 'and section is '+ section.getAttribute('data-nav'));
+    for (const section of sections)
+    {  
         if(currentSection != section.getAttribute('data-nav')){
             section.classList.remove('your-active-class');
         }
     }
     for(const aquery of aqueries){
-        console.log( 'currentAnchor is '+ currentAnchor);
-        if(currentAnchor == aquery.textContent){
-            aquery.id='anchorAtt';
+        //console.log( 'currentAnchor is '+ currentAnchor);
+        if(currentAnchor != aquery.textContent && currentAnchor != ''){
+            aquery.id='';
         }
         else{
-            aquery.id='';
+            aquery.id='anchorAtt';
         }
     }
     if(!!window.IntersectionObserver){    
@@ -112,7 +112,9 @@ function toggleActiveState(){
                 currentAnchor=entry.target.getAttribute('data-nav');
                 //console.log(currentAnchor);
             }
+
           observer.unobserve(entry.target);
+
         }
         },{rootMargin: "0px 0px -200px 0px"},{threshold: 1});
       });
