@@ -85,21 +85,7 @@ function navApp(sections) {
 // Add class 'active' to section when near top of viewport
 
 function toggleActiveState(){
-    for (const section of sections)
-    {  
-        if(currentSection != section.getAttribute('data-nav')){
-            section.classList.remove('your-active-class');
-        }
-    }
-    for(const aquery of aqueries){
-        //console.log( 'currentAnchor is '+ currentAnchor);
-        if(currentAnchor != aquery.textContent && currentAnchor != ''){
-            aquery.id='';
-        }
-        else{
-            aquery.id='anchorAtt';
-        }
-    }
+
     if(!!window.IntersectionObserver){    
     let observer = new IntersectionObserver((entries, observer) => { 
         entries.forEach(entry => {
@@ -109,14 +95,28 @@ function toggleActiveState(){
 
                 entry.target.classList.add('your-active-class');
                 currentSection=entry.target.getAttribute('data-nav');
-                currentAnchor=entry.target.getAttribute('data-nav');
-                //console.log(currentAnchor);
+                currentAnchor=currentSection;
+                for (const section of sections)
+                {  
+                    if(currentSection != section.getAttribute('data-nav')){
+                        section.classList.remove('your-active-class');
+                    }
+                }
+                for(const aquery of aqueries){
+                    //console.log( 'currentAnchor is '+ currentAnchor);
+                    if(currentAnchor != aquery.textContent && currentAnchor != ''){
+                        aquery.id='';
+                    }
+                    else{
+                        aquery.id='anchorAtt';
+                    }
+                }
             }
 
           observer.unobserve(entry.target);
 
         }
-        },{rootMargin: "0px 0px -200px 0px"},{threshold: 1});
+        },{rootMargin: "0px 0px px 0px"},{threshold: 1});
       });
       sections.forEach(section => { observer.observe(section) });
     }
@@ -154,7 +154,7 @@ for (const aquery of aqueries) {
     for (const section of sections) {
         
         if(section.getAttribute('data-nav') == aquery.textContent){
-            section.scrollIntoView({behavior: 'smooth', block: 'center'}); 
+            section.scrollIntoView({behavior: 'smooth', block: 'end', inline: "nearest"}); 
         }        
     }
     });
