@@ -82,18 +82,26 @@ function navApp(sections) {
 // Add class 'active' to section when near top of viewport
 
 function toggleActiveState(){
+     var currentSection=-10;
     for (const section of sections){
-        section.classList.remove('your-active-class');
+        if(currentSection != section.getAttribute('data-nav')){
+            section.classList.remove('your-active-class');
+        }
     }
     if(!!window.IntersectionObserver){    
     let observer = new IntersectionObserver((entries, observer) => { 
         entries.forEach(entry => {
         if(entry.isIntersecting){
           //console.log(entry);
-          entry.target.classList.add('your-active-class');
+            if(!(entry.target.classList.contains('your-active-class'))){
+
+                entry.target.classList.add('your-active-class');
+                currentSection=entry.target.getAttribute('data-nav');
+
+            }
           observer.unobserve(entry.target);
         }
-        },{rootMargin: "0px 0px -200px 0px"},{threshold: 1});
+        },{rootMargin: "0px 0px -200px 0px"},{threshold: 0.5});
       });
       sections.forEach(section => { observer.observe(section) });
     }
