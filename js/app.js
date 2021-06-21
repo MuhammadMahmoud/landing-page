@@ -27,7 +27,8 @@ var attArr=[]; //array for the store of section data to add it to the anchor of 
 var aqueries; // for list of anchors
 var queries; //for h2 inside sections
 var navLink=document.getElementById('navbar__menu');
-var currentSection=-10;
+// globalizing the current section & anchor to not lose the values 
+var currentSection=-10; 
 var currentAnchor='';
 
 /**
@@ -85,15 +86,15 @@ function navApp(sections) {
 // Add class 'active' to section when near top of viewport
 
 function toggleActiveState(){
-
+     //   intersect every the window meet a section
     if(!!window.IntersectionObserver){    
     let observer = new IntersectionObserver((entries, observer) => { 
         entries.forEach(entry => {
         if(entry.isIntersecting){
-          //console.log(entry);
             if(!(entry.target.classList.contains('your-active-class'))){
 
                 entry.target.classList.add('your-active-class');
+                //load the current intersected section & anchor to activte them
                 currentSection=entry.target.getAttribute('data-nav');
                 currentAnchor=currentSection;
                 for (const section of sections)
@@ -152,7 +153,7 @@ for (const aquery of aqueries) {
     aquery.addEventListener('click', function scrollToSection(event){
     event.preventDefault();
     for (const section of sections) {
-        
+            //scrol into the end of the section to avoid intersecting with the next section
         if(section.getAttribute('data-nav') == aquery.textContent){
             section.scrollIntoView({behavior: 'smooth', block: 'end', inline: "nearest"}); 
         }        
