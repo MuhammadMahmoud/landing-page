@@ -27,6 +27,9 @@ var attArr=[]; //array for the store of section data to add it to the anchor of 
 var aqueries; // for list of anchors
 var queries; //for h2 inside sections
 var navLink=document.getElementById('navbar__menu');
+var currentSection=-10;
+var currentAnchor='';
+
 /**
  * End Global Variables
  * Start Helper Functions
@@ -63,10 +66,10 @@ function navApp(sections) {
     for(var i=0;i<appLiSections.length;i++){
         
         var a=document.createElement('a');
-        a.classList.add('anchorAtt');
+        //a.classList.add('anchorAtt');
         a.classList.add('menu__link');
         a.textContent=attArr[i];
-        a.href='';
+        a.href='#';
         
          
         
@@ -76,16 +79,25 @@ function navApp(sections) {
     
         appLiSections[i].appendChild(fragment);
     }
-    aqueries=document.getElementsByClassName('anchorAtt');
+    aqueries=document.getElementsByClassName('menu__link');
 }
 
 // Add class 'active' to section when near top of viewport
 
 function toggleActiveState(){
-     var currentSection=-10;
-    for (const section of sections){
+         for (const section of sections)
+    {   //console.log('currentSection is '+ currentSection+ 'and section is '+ section.getAttribute('data-nav'));
         if(currentSection != section.getAttribute('data-nav')){
             section.classList.remove('your-active-class');
+        }
+    }
+    for(const aquery of aqueries){
+        console.log( 'currentAnchor is '+ currentAnchor);
+        if(currentAnchor == aquery.textContent){
+            aquery.id='anchorAtt';
+        }
+        else{
+            aquery.id='';
         }
     }
     if(!!window.IntersectionObserver){    
@@ -97,11 +109,12 @@ function toggleActiveState(){
 
                 entry.target.classList.add('your-active-class');
                 currentSection=entry.target.getAttribute('data-nav');
-
+                currentAnchor=entry.target.getAttribute('data-nav');
+                //console.log(currentAnchor);
             }
           observer.unobserve(entry.target);
         }
-        },{rootMargin: "0px 0px -200px 0px"},{threshold: 0.5});
+        },{rootMargin: "0px 0px -200px 0px"},{threshold: 1});
       });
       sections.forEach(section => { observer.observe(section) });
     }
