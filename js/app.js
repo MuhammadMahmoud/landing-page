@@ -76,7 +76,7 @@ function navApp(sections) {
     
         appLiSections[i].appendChild(fragment);
     }
-    aqueries=document.querySelectorAll('anchorAtt');
+    aqueries=document.getElementsByClassName('anchorAtt');
 }
 
 // Add class 'active' to section when near top of viewport
@@ -104,20 +104,17 @@ function toggleActiveState(){
 
 
 // Scroll to anchor ID using scrollTO event
-function scrollToSection(Event) {
-    //aqueries=document.getElementsByTagName('a');
-    Event.preventDefault();
-    //selected section
-    queries =document.querySelectorAll('h2');
-    //var selectedSection;
-    for (const queries of query) {
-        if(query.textContent == aquery.textContent){
-            query.scrollIntoView({behavior: 'smooth', block: 'center'}); 
-        }        
-    }
+// function scrollToSection(event ,aquery) {
+//     
+//     event.preventDefault();
+//     for (const section of sections) {
+//         if(section.getAttributeNode("data-nav").value == aquery.textContent){
+//             section.scrollIntoView({behavior: 'smooth', block: 'center'}); 
+//         }        
+//     }
 
     
-}
+// }
 
 
 /**
@@ -128,12 +125,16 @@ function scrollToSection(Event) {
 
 // Build menu 
 document.addEventListener('DOMContentLoaded',navApp(sections));
-// Scroll to section on link click
-//aqueries.addEventListener('click', scrollToSection(sections));
-//aqueries.forEach(aquery => aquery.addEventListener('click', scrollToSection));
 for (const aquery of aqueries) {
-    aquery.addEventListener('click', scrollToSection);
+    aquery.addEventListener('click', function scrollToSection(event){
+    event.preventDefault();
+    for (const section of sections) {
+        
+        if(section.getAttribute('data-nav') == aquery.textContent){
+            section.scrollIntoView({behavior: 'smooth', block: 'center'}); 
+        }        
+    }
+    });
 }
 // Set sections as active
 window.addEventListener('scroll', toggleActiveState);
-
