@@ -31,6 +31,7 @@ h1 {
     margin: 2em 1rem;
 }
 
+
 @media only screen and (min-width: 35em){
     h1 {
         font-size: 7em;
@@ -77,9 +78,7 @@ section {
     text-align: right;
 }
 
-.navbar__menu li {
-    display: inline-block;
-}
+
 
 .navbar__menu .menu__link {
     display: block;
@@ -97,7 +96,7 @@ section {
 
 /* Header Styles */
 .page__header {
-    background: #000;
+    background: rgb(255, 255, 255);
     position: fixed;
     top: 0;
     width: 100%;
@@ -123,10 +122,26 @@ section {
     text-align: left;
 }
 
+@media only screen and (max-width: 34.9375em){
+    .landing__container {
+        max-width: 50em;
+        padding: 4em;
+    }
+    .navbar__menu li {
+        display: block;
+        text-align: center;
+        border: 1px solid black;
+
+    }
+}
+
 @media only screen and (min-width: 35em){
     .landing__container {
         max-width: 50em;
         padding: 4em;
+    }
+    .navbar__menu li {
+        display: inline-block;
     }
 }
 
