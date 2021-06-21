@@ -83,7 +83,7 @@ function navApp(sections) {
 
 // Add class 'active' to section when near top of viewport
 
-toggleActiveState = ()=> {
+function toggleActiveState() {
     //   intersect every the window meet a section
     if (!!window.IntersectionObserver) {
         let observer = new IntersectionObserver((entries, observer) => {
